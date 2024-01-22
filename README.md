@@ -5,7 +5,6 @@ Welcome to the streamlined setup for your Django project! This Python script ens
 1. **Create a Working Environment:**
 
 2. **Clone the Repository:**
-     git clone https://github.com/arles680/About.git
 
 3. **Run the Automation Script:**
    py .\modified.py
