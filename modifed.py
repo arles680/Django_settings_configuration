@@ -3,6 +3,26 @@ import subprocess
 
 select_os = input('Enter your operating system (macos or windows): ')
 
+def create_folder_structure(base_path, app_name):
+    templates_path = os.path.join(base_path, app_name, 'templates')
+
+    os.makedirs(templates_path, exist_ok=True)
+    print(f'Folder structure created at {templates_path}.')
+
+    # Create index.html file
+    index_html_path = os.path.join(templates_path, 'index.html')
+    with open(index_html_path, 'w') as f:
+        f.write('<html>\n')
+        f.write('<head>\n')
+        f.write('    <title>Welcome to Django!</title>\n')
+        f.write('</head>\n')
+        f.write('<body>\n')
+        f.write(f'    <h1>Hello, {app_name} app!</h1>\n')
+        f.write('</body>\n')
+        f.write('</html>\n')
+
+    print(f'Created index.html at {templates_path}.')
+    
 def create_virtualenv(env_path):
     subprocess.run(['python3', '-m', 'venv', env_path])
     print(f'Virtual environment created at {env_path}.')
@@ -35,7 +55,7 @@ def modify_settings(base_path, project_name, app_name):
             lines.insert(i + 1, f"    '{app_name}',\n")
             break
     lines.append('\n')
-    lines.append("MEDIA_URL='media/'\n")
+    lines.append("MEDIA_URL='/media/'\n")
     lines.append("STATIC_ROOT=BASE_DIR/'static'\n")
     lines.append("MEDIA_ROOT=BASE_DIR/'media'\n")
     with open(settings_path, 'w') as f:
@@ -191,6 +211,7 @@ def Windows(env_path):
     modify_settings(base_path, project_name, app_name)
     modify_project_urls(base_path, project_name, app_name)
     create_main_urls(project_path, app_name)
+    create_folder_structure(project_path, app_name)
 
 if __name__ == '__main__':
     if select_os == "windows":
