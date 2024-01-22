@@ -35,7 +35,7 @@ def modify_settings(base_path, project_name, app_name):
             lines.insert(i + 1, f"    '{app_name}',\n")
             break
     lines.append('\n')
-    lines.append("MEDIA_URL='/media/'\n")
+    lines.append("MEDIA_URL='media/'\n")
     lines.append("STATIC_ROOT=BASE_DIR/'static'\n")
     lines.append("MEDIA_ROOT=BASE_DIR/'media'\n")
     with open(settings_path, 'w') as f:
